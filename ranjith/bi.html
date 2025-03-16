@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Business Intelligence</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Business Intelligence</title>
+    <style>
+        body {
+            text-align: center;
+            padding-top: 50px;
+            background-color: #f8f9fa;
+        }
+        .container {
+            background: #222;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            max-width: 800px;
+            margin: auto;
+            color: #ffffff;
+        }
+        h1 {
+            font-size: 24px;
+            font-weight: bold;
+            color: #ffcc00;
+            margin-bottom: 20px;
+        }
+        p {
+            font-size: 18px;
+            line-height: 1.6;
+            text-align: center;
+        }
+        .highlight {
+            font-weight: bold;
+            color: #ffcc00;
+        }
+        .btn-primary {
+            background-color: #ffcc00;
+            border-color: #ffcc00;
+            color: #222;
+            font-weight: bold;
+            padding: 10px 20px;
+            border-radius: 8px;
+            text-decoration: none;
+            display: inline-block;
+            margin-top: 20px;
+        }
+        /* Responsive */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 24px;
+            }
+            p {
+                font-size: 16px;
+            }
+        }
+        /* Star Rating Styles */
+        .rating-container {
+            margin-top: 30px;
+        }
+        .star-rating {
+            display: flex;
+            justify-content: center;
+            font-size: 30px;
+            cursor: pointer;
+        }
+        .star {
+            color: #ccc;
+            transition: color 0.3s;
+            margin: 0 5px;
+        }
+        .star.selected, .star:hover {
+            color: #ffcc00;
+        }
+        .rating-text {
+            font-size: 18px;
+            margin-top: 10px;
+            color: #ffcc00;
+        }
+    </style>
+</head>
+<body>
+    <div class="container mt-5">
+        <h1>📊 Business Intelligence</h1>
+        <p>
+            At <span class="highlight">Link Minus</span>, we empower businesses with <span class="highlight">strategic decision-making through data-driven insights</span>. Our <span class="highlight">business intelligence (BI) solutions</span> transform raw data into meaningful insights for better decision-making.
+        </p>
+        <p>
+            <h3>📌 Our Business Intelligence Services:</h3>
+            📈 <span class="highlight">Data Warehousing</span> – Centralized data storage for easy access.<br>
+            🔍 <span class="highlight">Diagnostic & Advanced Analytics</span> – Extracting deep insights from business data.<br>
+            📊 <span class="highlight">Custom Dashboards</span> – Interactive visual reports for performance tracking.<br>
+            📡 <span class="highlight">Real-Time Reporting</span> – Accurate insights at your fingertips.<br>
+            💡 <span class="highlight">Predictive Insights</span> – AI-driven forecasting and trend analysis.
+        </p>
+        
+        <h3 class="mt-3">🚀 Why Choose Our Business Intelligence Solutions?</h3>
+        <p>
+            ✔️ <span class="highlight">Informed Decision-Making</span> – Make data-backed strategic choices.<br>
+            ✔️ <span class="highlight">Increased Efficiency</span> – Automate and streamline reporting.<br>
+            ✔️ <span class="highlight">Competitive Edge</span> – Stay ahead with real-time insights.<br>
+            ✔️ <span class="highlight">Scalable Solutions</span> – Adapt as your business grows.<br>
+            ✔️ <span class="highlight">AI-Powered Analytics</span> – Leverage machine learning for deeper insights.
+        </p>
+
+        <!-- Rating System -->
+        <div class="rating-container">
+            <h3>⭐ Rate Our Business Intelligence Services</h3>
+            <div class="star-rating" id="starRating">
+                <span class="star" data-value="1">★</span>
+                <span class="star" data-value="2">★</span>
+                <span class="star" data-value="3">★</span>
+                <span class="star" data-value="4">★</span>
+                <span class="star" data-value="5">★</span>
+            </div>
+            <p class="rating-text" id="ratingText">Click on the stars to rate.</p>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const stars = document.querySelectorAll("#starRating .star");
+            const ratingText = document.getElementById("ratingText");
+            const ratingKey = "bi_service_rating"; // Key for localStorage
+            
+            let savedRating = localStorage.getItem(ratingKey) || 0;
+            updateStars(savedRating);
+
+            stars.forEach(star => {
+                star.addEventListener("click", function() {
+                    let rating = this.getAttribute("data-value");
+                    localStorage.setItem(ratingKey, rating);
+                    updateStars(rating);
+                });
+            });
+
+            function updateStars(rating) {
+                stars.forEach(star => {
+                    let value = star.getAttribute("data-value");
+                    if (value <= rating) {
+                        star.classList.add("selected");
+                    } else {
+                        star.classList.remove("selected");
+                    }
+                });
+
+                // Update rating text
+                if (rating > 0) {
+                    ratingText.textContent = `You rated this ${rating} stars!`;
+                } else {
+                    ratingText.textContent = "Click on the stars to rate.";
+                }
+            }
+        });
+    </script>
+</body>
+</html>

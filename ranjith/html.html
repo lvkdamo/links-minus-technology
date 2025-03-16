@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Company Login</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: #f8f9fa;
+        }
+
+        .login-box {
+            background: white;
+            border-radius: 10px;
+            padding: 20px;
+            width: 350px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .card {
+            margin-top: 20px;
+        }
+
+        #dashboard {
+            display: none;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container d-flex justify-content-center align-items-center vh-100" id="login-container">
+    <div class="login-box">
+        <h2 class="text-center">Company Login</h2>
+        <form id="loginForm">
+            <div class="mb-3">
+                <label for="username" class="form-label">Username</label>
+                <input type="text" class="form-control" id="username" required>
+            </div>
+            <div class="mb-3">
+                <label for="phone" class="form-label">Phone</label>
+                <input type="tel" class="form-control" id="phone" required>
+            </div>
+            <div class="mb-3">
+                <label for="email" class="form-label">Email</label>
+                <input type="email" class="form-control" id="email" required>
+            </div>
+            <button type="submit" class="btn btn-primary w-100">Login</button>
+        </form>
+    </div>
+</div>
+
+<!-- Notifications and Owner Panel -->
+<div class="container mt-5" id="dashboard">
+    <h3>Welcome, <span id="userDisplay"></span>!</h3>
+    <div class="row">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Notifications</h5>
+                    <ul id="notifications">
+                        <li>New policy update</li>
+                        <li>System maintenance at midnight</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Owner Panel</h5>
+                    <p>Manage users, reports, and website settings here.</p>
+                    <button class="btn btn-warning">Admin Access</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    document.getElementById("loginForm").addEventListener("submit", function(event) {
+        event.preventDefault();
+
+        let username = document.getElementById("username").value;
+        let phone = document.getElementById("phone").value;
+        let email = document.getElementById("email").value;
+
+        if (username && phone && email) {
+            document.getElementById("userDisplay").innerText = username;
+            document.getElementById("login-container").style.display = "none";
+            document.getElementById("dashboard").style.display = "block";
+
+            // Alert message for notification
+            setTimeout(function () {
+                alert("Welcome " + username + "! You have new notifications.");
+                
+                // Reset back to login page after alert
+                document.getElementById("login-container").style.display = "flex";
+                document.getElementById("dashboard").style.display = "none";
+                
+                // Clear input fields
+                document.getElementById("username").value = "";
+                document.getElementById("phone").value = "";
+                document.getElementById("email").value = "";
+            }, 1000); // Show notification after 1 second
+        } else {
+            alert("Please fill in all fields.");
+        }
+    });
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+</html>
